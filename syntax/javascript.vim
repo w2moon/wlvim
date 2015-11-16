@@ -92,6 +92,7 @@ syntax match javaScriptParens       "[()]"
 syntax match javaScriptOpSymbols    "=\{1,3}\|!==\|!=\|<\|>\|>=\|<=\|++\|+=\|--\|-="
 syntax match javaScriptEndColons    "[;,]"
 syntax match javaScriptLogicSymbols "\(&&\)\|\(||\)"
+syntax match javaScriptConstant /[A-Z0-9_]+/
 
 " include syntax modules
 runtime syntax/vim-es6/modules/*.vim
@@ -121,6 +122,7 @@ if version >= 508 || !exists("did_javascript_syn_inits")
 	HiLink javaScriptBraces                 Function
 	HiLink javaScriptParens                 String
 
+	HiLink javaScriptConstant                 Constant
 	HiLink javaScriptCallParens                 String
 	HiLink javaScriptComment                Comment
 	HiLink javaScriptLineComment            Comment
