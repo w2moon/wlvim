@@ -42,7 +42,8 @@ syntax keyword javaScriptStatement      return with
 syntax keyword javaScriptGlobalObjects  Array Boolean Date Function Math Number Object RegExp String
 syntax keyword javaScriptExceptions     try catch throw finally Error EvalError RangeError ReferenceError SyntaxError TypeError URIError
 syntax keyword javaScriptReserved       abstract enum int short boolean export interface static byte extends long super char final native synchronized class float package throws goto private transient debugger implements protected volatile double import public
-
+"Must before string define
+syntax match javaScriptConstant /[^a-z\.][A-Z_][A-Z0-9_]*/
 " Comments 
 syntax keyword javaScriptCommentTodo      TODO FIXME XXX TBD contained
 syntax match   javaScriptLineComment      "\/\/.*" contains=@Spell,javaScriptCommentTodo
@@ -76,10 +77,12 @@ endif
 " Function and arguments highlighting 
 syntax keyword javaScriptFuncKeyword     function contained
 syntax region  javaScriptFuncExp         start=/\w\+\s\==\s\=function\>/ end="\([^)]*\)" contains=javaScriptFuncEq,javaScriptFuncKeyword,javaScriptFuncArg keepend
+syntax region  javaScriptFuncExp2         start=/\w\+\s\=:\s\=function\>/ end="\([^)]*\)" contains=javaScriptFuncEq,javaScriptFuncKeyword,javaScriptFuncArg keepend
 syntax match   javaScriptFuncArg         "\(([^()]*)\)" contains=javaScriptParens,javaScriptFuncComma contained
 syntax match   javaScriptFuncComma       /,/ contained
 syntax match   javaScriptFuncEq          /=/ contained
 syntax region  javaScriptFuncDef         start="\<function\>" end="\([^)]*\)" contains=javaScriptFuncKeyword,javaScriptFuncArg keepend
+
 
 syntax match javaScriptCall /[a-zA-Z_]\w*\s*/ contained
 syntax match javaScriptCallParens /(/ contained
@@ -92,8 +95,7 @@ syntax match javaScriptParens       "[()]"
 syntax match javaScriptOpSymbols    "=\{1,3}\|!==\|!=\|<\|>\|>=\|<=\|++\|+=\|--\|-="
 syntax match javaScriptEndColons    "[;,]"
 syntax match javaScriptLogicSymbols "\(&&\)\|\(||\)"
-syntax match javaScriptConstant /[A-Z0-9_]+/
-
+syntax match javaScriptIdentifier /this\./
 " include syntax modules
 runtime syntax/vim-es6/modules/*.vim
 
