@@ -1,10 +1,26 @@
-
 let g:ctrlp_max_files=0
 nnoremap <leader>bm :Bookmark<cr> 
 nnoremap <leader>bo :NERDTreeFind<cr>:OpenBookmark 
-nnoremap <c-f> :Ack 
+nnoremap <space>ff :Ack 
 "config
 nnoremap <leader>ws :edit ~/.vim/bundle/wlvim/plugin/base.vim<cr>
+inoremap jk <esc>
+set imdisable
+let g:ctrlp_max_files=0
+if has("gui_macvim")
+    
+    set guifont=Andale\ Mono\ Regular:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
+    set fu
+    nnoremap <space>fs  :call FullScreenToggle()<cr>
+    function! FullScreenToggle()
+        if &fullscreen
+            set nofu
+        else
+            set fu
+        endif
+    endfunction
+endif  
+
 augroup wlgroup
     autocmd!
     autocmd BufWritePost base.vim :so %
