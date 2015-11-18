@@ -11,7 +11,7 @@ augroup wlgroup
 augroup END
 
 " Show syntax highlighting groups for word under cursor
-"nnoremap <C-S-P> :call <SID>SynStack()<CR>
+nnoremap <C-S-P> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
   if !exists("*synstack")
     return
@@ -20,3 +20,7 @@ function! <SID>SynStack()
 endfunc
 
 nnoremap <c-g> :call wl#test({'b':22})<cr>
+
+if has("win32")
+ au GUIEnter * simalt ~x
+endif
