@@ -43,7 +43,7 @@ syntax keyword javaScriptGlobalObjects  Array Boolean Date Function Math Number 
 syntax keyword javaScriptExceptions     try catch throw finally Error EvalError RangeError ReferenceError SyntaxError TypeError URIError
 syntax keyword javaScriptReserved       abstract enum int short boolean export interface static byte extends long super char final native synchronized class float package throws goto private transient debugger implements protected volatile double import public
 "Must before string define
-syntax match javaScriptConstant /[^a-z\.][A-Z_][A-Z0-9_]*/
+syntax match javaScriptConstant /[^a-z\.][A-Z_][A-Z0-9_]*[\s=:]/
 " Comments 
 syntax keyword javaScriptCommentTodo      TODO FIXME XXX TBD contained
 syntax match   javaScriptLineComment      "\/\/.*" contains=@Spell,javaScriptCommentTodo
