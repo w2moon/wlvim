@@ -11,7 +11,6 @@ let g:ctrlp_max_files=0
 if has("gui_macvim")
     
     set guifont=Andale\ Mono\ Regular:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
-    set fu
     nnoremap <space>fs  :call FullScreenToggle()<cr>
     function! FullScreenToggle()
         if &fullscreen
@@ -20,6 +19,17 @@ if has("gui_macvim")
             set fu
         endif
     endfunction
+    let g:ctrlp_user_command =  {
+                \ 'types': {
+                    \ 1: ['.git', "_rb=%s/;cd $_rb;t=`git ls-files . --cached --exclude-standard --others`;for i in `grep path .gitmodules | sed %\"s/.*= //%\"`; do cd $_rb$i;t+=`git ls-files . --cached --exclude-standard --others|awk '{print %\"$i/$1%\"}'`%\"\\n%\"; done; cd $_rb;echo -e %\"$t%\""],
+                    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+                \ },
+                \ 'fallback': g:ctrlp_user_command.fallback
+            \ }
+    
+let lscmd = g:ctrlp_user_command.types[1][1]
+echom printf(lscmd,"/Users/wp/Documents/projects/enoch")
+
 elseif has("win32")
     au GUIEnter * simalt ~x
 endif  
