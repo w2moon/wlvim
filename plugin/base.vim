@@ -31,21 +31,24 @@ if has("gui_macvim")
 "echom printf(lscmd,"/Users/wp/Documents/projects/enoch")
 
 elseif has("win32")
+    
+    set guifont=Andale_Mono:h13,Menlo:h13,Consolas:h13,Courier_New:h13
     au GUIEnter * simalt ~x
   let g:ctrlp_user_command =  {
                 \ 'types': {
-                    \ 1: ['.git', "set p=%s && git ls-files && (for /f \"tokens=2 delims==\" %%d in ('findstr \"path %%=\" .gitmodules') do (cd %%d && for /f \"delims=\" %%x in (' git ls-files') do ( echo %%d/%%x) &&cd %%p%%    ) ) "],
+                    \ 1: ['.git', "node c:/tools/wllovi/bin/wllovi --method lsfiles --path %s"],
                     \ 2: ['.hg', 'hg --cwd %s locate -I .'],
                 \ },
                 \ 'fallback': g:ctrlp_user_command.fallback
             \ }
-
-let lscmd = g:ctrlp_user_command.types[1][1]
-echom printf(lscmd,"\"c:\\project\\enoch\"")
+  let gct = g:ctrlp_user_command.types[1][1]
+  echom gct
+let s:lscmd = printf(gct,"c:/project/enoch")
+echom s:lscmd
+echom system(s:lscmd)
    
 endif  
 
-echom system("set p=1 && dir c:\\ ")
 augroup wlgroup
     autocmd!
     autocmd BufWritePost base.vim :so %
