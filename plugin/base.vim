@@ -1,15 +1,25 @@
-let g:ctrlp_max_files=0
 set fileformats=unix,dos
 nnoremap <leader>bm :Bookmark<cr> 
 nnoremap <leader>bo :NERDTreeFind<cr>:OpenBookmark 
-nnoremap <space>ff :Ack 
+nnoremap <space>F :CtrlP<cr>
+nnoremap <space>f :call wl#FindFileByName(expand("<cword>"))<cr>
+nnoremap <space>W :FindInFiles 
+nnoremap <space>w :call wl#FindInFiles(expand("<cword>"))<cr>
+command! -nargs=*  FindInFiles call wl#FindInFiles(<q-args>)
 "config
-nnoremap <leader>ws :edit ~/.vim/bundle/wlvim/plugin/base.vim<cr>
+nnoremap <leader>ws :edit ~/.vim/bundle/wlvim/plugin/base.vim<cr> 
 inoremap jk <esc>
+inoremap <esc> <nop>
 set imdisable
 let g:ctrlp_max_files=0
+let g:ctrlp_by_filename = 1
+let g:ctrlp_root_markers = ['.project']
+let g:NERDTreeChDirMode       = 2
+let g:ctrlp_working_path_mode = 'rw'
+
+unlet g:ctrlp_user_command
+let g:ctrlp_user_command = "wllovi --method lsfiles --path %s" 
 if has("gui_macvim")
-    
     set guifont=Andale\ Mono\ Regular:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
     nnoremap <space>fs  :call FullScreenToggle()<cr>
     function! FullScreenToggle()
@@ -19,34 +29,16 @@ if has("gui_macvim")
             set fu
         endif
     endfunction
-    let g:ctrlp_user_command =  {
-                \ 'types': {
-                    \ 1: ['.git', "_rb=%s/;cd $_rb;t=`git ls-files . --cached --exclude-standard --others`;for i in `grep path .gitmodules | sed %\"s/.*= //%\"`; do cd $_rb$i;t+=`git ls-files . --cached --exclude-standard --others|awk '{print %\"$i/$1%\"}'`%\"\\n%\"; done; cd $_rb;echo -e %\"$t%\""],
-                    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-                \ },
-                \ 'fallback': g:ctrlp_user_command.fallback
-            \ }
-    
-"let lscmd = g:ctrlp_user_command.types[1][1]
-"echom printf(lscmd,"/Users/wp/Documents/projects/enoch")
-
-elseif has("win32")
+ elseif has("win32")
     
     set guifont=Andale_Mono:h13,Menlo:h13,Consolas:h13,Courier_New:h13
     au GUIEnter * simalt ~x
-  let g:ctrlp_user_command =  {
-                \ 'types': {
-                    \ 1: ['.git', "node c:/tools/wllovi/bin/wllovi --method lsfiles --path %s"],
-                    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-                \ },
-                \ 'fallback': g:ctrlp_user_command.fallback
-            \ }
-  let gct = g:ctrlp_user_command.types[1][1]
-  echom gct
-let s:lscmd = printf(gct,"c:/project/enoch")
-echom s:lscmd
-echom system(s:lscmd)
-   
+    set guioptions-=m
+    set guioptions-=T
+    set guioptions-=r
+    set guioptions-=L
+    set guioptions-=b
+    set showtabline=0
 endif  
 
 augroup wlgroup
