@@ -81,3 +81,6 @@ function! wl#FindFileByName(args)
     let g:ctrlp_default_input = "0"
 endfunction
 
+function! wl#FindInDictionary(args)
+    exe "!node d:/project/wllovi/bin/wllovi --method dictionary --content " . a:args
+endfunction

@@ -5,6 +5,7 @@ nnoremap <space>F :CtrlP<cr>
 nnoremap <space>f :call wl#FindFileByName(expand("<cword>"))<cr>
 nnoremap <space>W :FindInFiles 
 nnoremap <space>w :call wl#FindInFiles(expand("<cword>"))<cr>
+nnoremap <space>d :call wl#FindInDictionary(expand("<cword>"))<cr>
 command! -nargs=*  FindInFiles call wl#FindInFiles(<q-args>)
 "config
 nnoremap <leader>ws :edit ~/.vim/bundle/wlvim/plugin/base.vim<cr> 
