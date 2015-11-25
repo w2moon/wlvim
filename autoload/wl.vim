@@ -82,5 +82,23 @@ function! wl#FindFileByName(args)
 endfunction
 
 function! wl#FindInDictionary(args)
-    exe "!node d:/project/wllovi/bin/wllovi --method dictionary --content " . a:args
+    call wl#TempView("dictionary",system("node d:/project/wllovi/bin/wllovi --method dictionary --content " . a:args))
 endfunction
+
+
+
+function! wl#TempView(name,txt)
+    let bno = bufnr(a:name,1)
+    let wno = bufwinnr(bno)
+    if wno == -1
+        exe "sb " . a:name
+    else
+        exe "winc " . wno
+    endif
+    exe "setlocal buftype=nofile bufhidden=hide noswapfile"
+    exe "setlocal filetype=help"
+    call setline(line('.'),split(a:txt,"\n"))
+    exe "map <buffer> q :quit<cr>"
+endfunction
+
+
