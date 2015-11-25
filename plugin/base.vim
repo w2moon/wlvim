@@ -22,7 +22,7 @@ unlet g:ctrlp_user_command
 let g:ctrlp_user_command = "wllovi --method lsfiles --path %s" 
 if has("gui_macvim")
     set guifont=Andale\ Mono\ Regular:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
-    nnoremap <space>fs  :call FullScreenToggle()<cr>
+    nnoremap <space>s  :call FullScreenToggle()<cr>
     function! FullScreenToggle()
         if &fullscreen
             set nofu

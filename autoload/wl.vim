@@ -82,5 +82,5 @@ function! wl#FindFileByName(args)
 endfunction
 
 function! wl#FindInDictionary(args)
-    exe "!node d:/project/wllovi/bin/wllovi --method dictionary --content " . a:args
+    exe "!wllovi --method dictionary --content " . a:args
 endfunction
