@@ -24,7 +24,7 @@ function! TestFunc()
     echom "testfunc"
     exe "vnew dictionary"
     exe "setlocal buftype=nofile bufhidden=hide noswapfile"
-    let cmd = "dir "
+    let cmd = "ls "
     let result = system(cmd)
     call setline(line('.'),result)
     exe "map <buffer> q :quit<cr>"
