@@ -18,17 +18,7 @@ let g:ctrlp_root_markers = ['.project']
 let g:NERDTreeChDirMode       = 2
 let g:ctrlp_working_path_mode = 'rw'
 
-
-nnoremap <space>tp :call TestFunc()<cr>
-function! TestFunc()
-    echom "testfunc"
-    exe "vnew dictionary"
-    exe "setlocal buftype=nofile bufhidden=hide noswapfile"
-    let cmd = "ls "
-    let result = system(cmd)
-    call setline(line('.'),result)
-    exe "map <buffer> q :quit<cr>"
-endfunction
+nnoremap <space>tp :call wl#TempView("dictionary","fdfdfdfdf\nfdfdfdfj343\n")<cr>
 unlet g:ctrlp_user_command
 let g:ctrlp_user_command = "wllovi --method lsfiles --path %s" 
 if has("gui_macvim")
@@ -42,7 +32,6 @@ if has("gui_macvim")
         endif
     endfunction
  elseif has("win32")
-    
     set guifont=Andale_Mono:h13,Menlo:h13,Consolas:h13,Courier_New:h13
     au GUIEnter * simalt ~x
     set guioptions-=m
@@ -51,7 +40,7 @@ if has("gui_macvim")
     set guioptions-=L
     set guioptions-=b
     set showtabline=0
-endif  
+endif
 
 augroup wlgroup
     autocmd!
@@ -68,3 +57,5 @@ function! <SID>SynStack()
 endfunc
 
 nnoremap <c-g> :call wl#test({'b':22})<cr>
+
+nnoremap <leader>so :SessionOpen default<CR>
