@@ -13,7 +13,8 @@ inoremap jk <esc>
 inoremap <esc> <nop>
 set imdisable
 let g:ctrlp_max_files=0
-let g:ctrlp_by_filename = 1
+let g:ctrlp_regexp = 1
+let g:ctrlp_by_filename = 0
 let g:ctrlp_root_markers = ['.project']
 let g:NERDTreeChDirMode       = 2
 let g:ctrlp_working_path_mode = 'rw'
