@@ -11,15 +11,30 @@ command! -nargs=*  FindInFiles call wl#FindInFiles(<q-args>)
 nnoremap <leader>ws :edit ~/.vim/bundle/wlvim/plugin/base.vim<cr> 
 inoremap jk <esc>
 inoremap <esc> <nop>
-set imdisable
+"set imdisable
 let g:ctrlp_max_files=0
 let g:ctrlp_regexp = 1
 let g:ctrlp_by_filename = 0
 let g:ctrlp_root_markers = ['.project']
 let g:NERDTreeChDirMode       = 2
 let g:ctrlp_working_path_mode = 'rw'
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
-nnoremap <space>tp :call wl#TempView("dictionary","fdfdfdfdf\nfdfdfdfj343\n")<cr>
+map <silent> <C-e> :call g:WorkaroundNERDTreeToggle()<CR>
+map <silent> <Leader>e :call g:WorkaroundNERDTreeFind()<CR>
+
+function! g:WorkaroundNERDTreeToggle()
+  try | NERDTreeToggle | catch | silent! NERDTree | endtry
+endfunction
+
+
+function! g:WorkaroundNERDTreeFind()
+  try | NERDTreeFind | catch | silent! NERDTree | endtry
+endfunction
+
+set viminfo='100,<50,s10,h,rA:,rB:,!
+autocmd VimEnter * SessionOpenLast
+
 unlet g:ctrlp_user_command
 let g:ctrlp_user_command = "wllovi --method lsfiles --path %s" 
 if has("gui_macvim")
@@ -60,3 +75,14 @@ endfunc
 nnoremap <c-g> :call wl#test({'b':22})<cr>
 
 nnoremap <leader>so :SessionOpen default<CR>
+
+"function! InsertTabWrapper()
+    "let col = col('.') - 1
+    "if !col || getline('.')[col - 1] !~ '\k'
+        "return "\<tab>"
+    "else
+        "return "\<c-p>"
+    "endif
+"endfunction
+"inoremap <expr> <tab> InsertTabWrapper()
+"inoremap <s-tab> <c-n>
