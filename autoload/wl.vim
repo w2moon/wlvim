@@ -82,7 +82,7 @@ function! wl#FindFileByName(args)
 endfunction
 
 function! wl#FindInDictionary(args)
-    call wl#TempView("dictionary",system("node d:/project/wllovi/bin/wllovi --method dictionary --content " . a:args))
+    call wl#TempView("dictionary",system("wllovi --method dictionary --content " . a:args))
 endfunction
 
 
@@ -101,4 +101,10 @@ function! wl#TempView(name,txt)
     exe "map <buffer> q :quit<cr>"
 endfunction
 
+
+function! wl#cTags()
+    call wl#Cwd2Project()
+    let cmd = g:CTAGS . " -R --exclude=\'\.git\' --exclude=\'\.svn\' --exclude=\'node_modules\' --exclude=\'publish\' --exclude=\'*min.js\' --exclude=\'data\'"
+    echom system(cmd)
+endfunction
 
