@@ -104,7 +104,7 @@ endfunction
 
 function! wl#cTags()
     call wl#Cwd2Project()
-    let cmd = g:CTAGS . " -R --exclude=\'\.git\' --exclude=\'\.svn\' --exclude=\'node_modules\' --exclude=\'publish\' --exclude=\'*min.js\' --exclude=\'data\'"
+    let cmd = g:CTAGS . " -R --exclude=\.git --exclude=\.svn --exclude=node_modules --exclude=publish --exclude=*min.js --exclude=data"
     echom system(cmd)
 endfunction
 
