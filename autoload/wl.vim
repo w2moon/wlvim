@@ -102,9 +102,13 @@ function! wl#TempView(name,txt)
 endfunction
 
 
-function! wl#cTags()
+function! wl#cTags(excludes)
     call wl#Cwd2Project()
-    let cmd = g:CTAGS . " -R --exclude=\.git --exclude=\.svn --exclude=node_modules --exclude=publish --exclude=*min.js --exclude=data"
+    let cmd = g:CTAGS . " -R --exclude=\.git --exclude=\.svn --exclude=publish --exclude=*min.js"
+    for k in range(0,len(a:excludes)-1)
+        let cmd = cmd . ' --exclude=' . a:excludes[k] . ' '
+    endfor
+    echom cmd
     echom system(cmd)
 endfunction
 
