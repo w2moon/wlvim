@@ -39,7 +39,14 @@ function! g:WorkaroundNERDTreeFind()
 endfunction
 
 set viminfo='100,<50,s10,h,rA:,rB:,!
-autocmd VimEnter * if argc() == 0 | SessionOpenLast | endif
+autocmd VimEnter * call OpenLastSession()
+
+function! OpenLastSession()
+    if argc() == 0
+        SessionOpenLast
+    endif
+endfunction
+
 
 unlet g:ctrlp_user_command
 let g:ctrlp_user_command = "wllovi --method lsfiles --path %s" 
