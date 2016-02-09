@@ -1,4 +1,7 @@
 set fileformats=unix,dos
+set encoding=utf-8
+set termencoding=utf-8
+language messages zh_CN.utf-8
 nnoremap <leader>bm :Bookmark<cr> 
 nnoremap <leader>bo :NERDTreeFind<cr>:OpenBookmark 
 noremap <space>m :JsDoc<cr>
